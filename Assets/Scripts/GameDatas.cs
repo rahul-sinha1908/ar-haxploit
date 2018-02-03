@@ -14,8 +14,8 @@ public class GameDatas : MonoBehaviour {
 	public static GameDatas instance;
 	private List<MyPair> detTrack;
 	public int nVal;
-	public bool wonLast;
-	public int rights, wrongs;
+	public bool objPressed, colPressed;
+	private int rights, wrongs;
 
 	void Awake(){
 		instance=this;
@@ -39,5 +39,28 @@ public class GameDatas : MonoBehaviour {
 		if(detTrack.Count<nVal)
 			return null;
 		return detTrack[0];
+	}
+	public int getNBackObj(){
+		if(detTrack.Count<nVal)
+			return -1;
+		return detTrack[0].obj;
+	}
+	public int getNBackCol(){
+		if(detTrack.Count<nVal)
+			return -1;
+		return detTrack[0].col;
+	}
+
+	public void increaseRight(){
+		rights++;
+	}
+	public void increaseWrong(){
+		wrongs++;
+	}
+	public int getRights(){
+		return rights;
+	}
+	public int getWrongs(){
+		return wrongs;
 	}
 }
