@@ -17,13 +17,16 @@ public class MyPrefabController : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
+		Screen.orientation=ScreenOrientation.LandscapeLeft;
+		//ScreenOrientation.LandscapeLeft
+		Debug.Log(initialPos+" : "+finalPos);
 		reinitPos();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		curPos+=speedLerp*Time.deltaTime;
-		transform.position = Vector3.Lerp(initialPos, finalPos, curPos);
+		transform.localPosition = Vector3.Lerp(initialPos, finalPos, curPos);
 
 		if(curPos>=1){
 			curPos=0;
