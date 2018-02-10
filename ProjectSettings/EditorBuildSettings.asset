@@ -14,3 +14,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/DualNBack.unity
     guid: a695c6456722e498db39ab5e49460e28
+  - enabled: 0
+    path: Assets/Scenes/GokuScene.unity
+    guid: dcad5117f93924999864aff5fbaa7566

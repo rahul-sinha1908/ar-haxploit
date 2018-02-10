@@ -48,6 +48,8 @@ public class MyPrefabController : MonoBehaviour {
 		GameDatas.instance.objPressed=false;
 		GameDatas.instance.colPressed=false;
 
+		GameController.instance.refreshButtons();
+
 		reinitPos();
 	}
 	private void reinitPos(){

@@ -15,10 +15,12 @@ public class GameDatas : MonoBehaviour {
 	private List<MyPair> detTrack;
 	public int nVal;
 	public bool objPressed, colPressed;
+	public bool isGameAlive;
 	private int rights, wrongs;
 
 	void Awake(){
 		instance=this;
+		isGameAlive=true;
 	}
 
 	// Use this for initialization
