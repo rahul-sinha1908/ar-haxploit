@@ -10,6 +10,7 @@ public class MyPrefabController : MonoBehaviour {
 	private int objPointer, colorPointer;
 	private float curPos=0;
 	public float speedLerp;
+	public int totScoreNeeded=10;
 	private System.Random random;
 
 	void Awake(){
@@ -20,9 +21,10 @@ public class MyPrefabController : MonoBehaviour {
 		Screen.orientation=ScreenOrientation.LandscapeLeft;
 		//ScreenOrientation.LandscapeLeft
 		Debug.Log(initialPos+" : "+finalPos);
+	}
+	void OnEnable(){
 		reinitPos();
 	}
-	
 	// Update is called once per frame
 	void Update () {
 		curPos+=speedLerp*Time.deltaTime;
@@ -42,7 +44,7 @@ public class MyPrefabController : MonoBehaviour {
 	}
 
 	private void reachedEnd(){
-		calcScore();
+		bool shouldEnd = calcScore();
 		GameDatas.instance.pushMe(objPointer, colorPointer);
 
 		GameDatas.instance.objPressed=false;
@@ -51,6 +53,10 @@ public class MyPrefabController : MonoBehaviour {
 		GameController.instance.refreshButtons();
 
 		reinitPos();
+
+		if(shouldEnd){
+			GameController.instance.showNextLevel();
+		}
 	}
 	private void reinitPos(){
 		if(random==null)
@@ -68,10 +74,10 @@ public class MyPrefabController : MonoBehaviour {
 			objs[i].SetActive(false);
 		}
 	}
-	private void calcScore(){
+	private bool calcScore(){
 		GameDatas.MyPair nBack=GameDatas.instance.getNBack();
 		if(nBack==null)
-			return;
+			return false;
 		bool colB = (nBack.col==colorPointer);
 		bool objB = (nBack.obj==objPointer);
 
@@ -81,5 +87,7 @@ public class MyPrefabController : MonoBehaviour {
 		}else if(GameDatas.instance.objPressed || GameDatas.instance.colPressed || colB || objB){
 			GameDatas.instance.increaseWrong();
 		}
+		int totScore = GameDatas.instance.getRights()+GameDatas.instance.getWrongs();;
+		return (totScore>totScoreNeeded);
 	}
 }

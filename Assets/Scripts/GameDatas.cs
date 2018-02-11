@@ -27,6 +27,13 @@ public class GameDatas : MonoBehaviour {
 	void Start () {
 		detTrack=new List<MyPair>();
 	}
+	public void reinitGameDatas(int n){
+		nVal=n;
+		detTrack.Clear();
+		rights=0;
+		wrongs=0;
+		isGameAlive=true;
+	}
 
 	public void pushMe(int obj, int col){
 		if(detTrack.Count==nVal){
