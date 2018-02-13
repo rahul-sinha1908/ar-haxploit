@@ -5,10 +5,12 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Firebase.Unity;
 using Firebase.Auth;
+using MyGame;
 
 public class MainMenuHandler : MonoBehaviour {
 
 	public Button playBtn;
+	public GameObject mainMenuPanel, loginPanel, registerPanel;
 	private FirebaseAuth auth;
 	private FirebaseUser user;
 
@@ -23,6 +25,16 @@ public class MainMenuHandler : MonoBehaviour {
 		Screen.orientation=ScreenOrientation.Portrait;
 		InitializeFirebase();
 		bindListeners();
+		attachMenuPanels();
+	}
+
+	private void attachMenuPanels(){
+		MainMenuDatas.instance.menuMapping[MenuStates.MainMenu]=mainMenuPanel;
+		MainMenuDatas.instance.menuMapping[MenuStates.LoginPanel]=loginPanel;
+		MainMenuDatas.instance.menuMapping[MenuStates.RegisterPanel]=registerPanel;
+
+		GameMethods.deactivateAllMenu();
+		GameMethods.activateMenuAbsolutely(MenuStates.LoginPanel);
 	}
 
 	private void bindListeners(){
@@ -37,6 +49,7 @@ public class MainMenuHandler : MonoBehaviour {
 	}
 
 	void InitializeFirebase() {
+		Debug.Log("Initializing Firebase!");
 		auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
 		auth.StateChanged += AuthStateChanged;
 		AuthStateChanged(this, null);
