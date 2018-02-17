@@ -29,7 +29,7 @@ public class LoginScript : MonoBehaviour {
 			}
 			if (task.IsFaulted) {
 				Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + task.Exception);
-				MyCanvasScript.instance.showToast("Error : "+task.Exception);
+				MyCanvasScript.instance.showToast("Error : "+task.Exception.Message);
 				return;
 			}
 

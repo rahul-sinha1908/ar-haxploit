@@ -34,15 +34,16 @@ public class RegisterScript : MonoBehaviour {
 			}
 			if (task.IsFaulted) {
 				Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + task.Exception);
-				MyCanvasScript.instance.showToast("Error : "+task.Exception, 4);
+				MyCanvasScript.instance.showToast("Error : "+task.Exception.Message, 4);
 				return;
 			}
 
 			// Firebase user has been created.
-			MyCanvasScript.instance.showToast("Successful");
+			MyCanvasScript.instance.showToast("Successful! Now You can login.");
 			Firebase.Auth.FirebaseUser newUser = task.Result;
 			Debug.LogFormat("Firebase user created successfully: {0} ({1})",
 				newUser.DisplayName, newUser.UserId);
+			GameMethods.activateMenuAbsolutely(MenuStates.LoginPanel);
 		});
 	}
 }
