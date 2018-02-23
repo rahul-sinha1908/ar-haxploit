@@ -29,8 +29,8 @@ public class ExampleScript : MonoBehaviour
 			gyro=Input.gyro;
 			gyro.enabled=true;
 
-			// cameraHolder.transform.rotation = Quaternion.Euler(90f, 90f, 0f);
-			// rot = new Quaternion(0,0,1,0);
+			cameraHolder.transform.rotation = Quaternion.Euler(90f, 90f, 0f);
+			rot = new Quaternion(0,0,1,0);
 
 			return true;
 		}
@@ -39,9 +39,9 @@ public class ExampleScript : MonoBehaviour
 	}
 	void Update(){
 		if(gyroEnabled){
-			//transform.localRotation = gyro.attitude*rot;
+			transform.localRotation = gyro.attitude*rot;
 			//transform.localRotation = Quaternion.LookRotation(gyro.gravity, Vector3.up);
-			Debug.Log(Input.acceleration);
+			// Debug.Log(Input.acceleration);
 			//Debug.Log("Show Details : "+gyro.gravity+" : "+gyro.attitude+" : "+transform.localRotation);
 			myGyroTxt.text="Gyro : "+gyro.gravity+" : "+gyro.attitude;
 			
